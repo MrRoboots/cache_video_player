@@ -80,10 +80,18 @@ final class VideoPlayer {
 
         HttpProxyCacheServer proxy = HttpProxyCacheUtil.getVideoProxy(context);
 
-        // 将url传入，AndroidVideoCache判断是否使用缓存文件
-        String proxyUrl = proxy.getProxyUrl(dataSource);
-        Uri uri = Uri.parse(proxyUrl);
-        Log.e("========>proxyUrl", uri.toString());
+        Uri uri = null;
+
+        //不支持m3u8缓存数据
+        if (!dataSource.toLowerCase().contains(".m3u8") || !dataSource.toLowerCase().contains(".ts") ||
+                !dataSource.toLowerCase().contains(".ism") || !dataSource.toLowerCase().contains(".ismc")) {
+            // 将url传入，AndroidVideoCache判断是否使用缓存文件
+            String proxyUrl = proxy.getProxyUrl(dataSource);
+            uri = Uri.parse(proxyUrl);
+            Log.e("========>proxyUrl", uri.toString());
+        } else {
+            uri = Uri.parse(dataSource);
+        }
 
         DataSource.Factory dataSourceFactory;
         if (isHTTP(uri)) {
