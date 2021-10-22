@@ -8,7 +8,7 @@ import java.io.File;
 
 public class CachesUtil {
 
-    public static String VIDEO = "video";
+    public static String VIDEO = "hz_video";
 
     /**
      * 获取媒体缓存文件

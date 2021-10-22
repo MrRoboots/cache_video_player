@@ -11,9 +11,7 @@ public class HttpProxyCacheUtil {
     public static HttpProxyCacheServer getVideoProxy(Context context) {
         if (videoProxy == null) {
             videoProxy = new HttpProxyCacheServer.Builder(context)
-                    .cacheDirectory(CachesUtil.getMediaCacheFile(context, CachesUtil.VIDEO))
                     .maxCacheSize(1024 * 1024 * 1024) // 缓存大小
-                    .fileNameGenerator(new CacheFileNameGenerator())
                     .build();
         }
         return videoProxy;
